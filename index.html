@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PVP TIERS • MINECRAFT RANKINGS</title>
+    <title>PVP TIERS • MINECRAFT ELITE RANKINGS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,47 +16,85 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f0c1f 0%, #1a1b2f 100%);
+            background: #0a0b0f;
             color: #fff;
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
         }
 
-        /* Animated Background */
-        .bg-orb {
+        /* Premium Animated Background */
+        .gradient-bg {
             position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .gradient-bg svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .bg-orb-1 {
+            position: fixed;
+            top: -20%;
+            right: -10%;
             width: 800px;
             height: 800px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
             border-radius: 50%;
-            top: -200px;
-            right: -200px;
-            filter: blur(60px);
-            animation: orbFloat 20s ease-in-out infinite;
-            z-index: 0;
+            filter: blur(80px);
+            animation: float1 20s ease-in-out infinite;
+            z-index: -1;
         }
 
         .bg-orb-2 {
             position: fixed;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, transparent 70%);
+            bottom: -20%;
+            left: -10%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.25) 0%, transparent 70%);
             border-radius: 50%;
-            bottom: -100px;
-            left: -100px;
+            filter: blur(80px);
+            animation: float2 25s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        .bg-orb-3 {
+            position: fixed;
+            top: 40%;
+            left: 30%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
             filter: blur(60px);
-            animation: orbFloat 25s ease-in-out infinite reverse;
-            z-index: 0;
+            animation: float3 18s ease-in-out infinite;
+            z-index: -1;
         }
 
-        @keyframes orbFloat {
+        @keyframes float1 {
             0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(30px, 30px) scale(1.1); }
+            50% { transform: translate(40px, 40px) scale(1.1); }
         }
 
-        /* Grid Pattern */
-        .grid-pattern {
+        @keyframes float2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-40px, -30px) scale(1.15); }
+        }
+
+        @keyframes float3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -40px) scale(1.2); }
+        }
+
+        /* Animated Grid Overlay */
+        .grid-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -65,8 +103,14 @@
             background-image: 
                 linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: 0;
+            background-size: 60px 60px;
+            animation: gridMove 15s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
         }
 
         /* Main Container */
@@ -78,186 +122,311 @@
             z-index: 10;
         }
 
-        /* Header */
+        /* Animated Header */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 3rem;
-            padding: 1.5rem 2rem;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
+            padding: 1.5rem 2.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 32px;
+            border-radius: 40px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: headerGlow 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #6366f1, #ec4899, transparent);
+            animation: headerLine 4s linear infinite;
+        }
+
+        @keyframes headerLine {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes headerGlow {
+            0%, 100% { box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.3); }
+            50% { box-shadow: 0 25px 60px -8px rgba(236, 72, 153, 0.4); }
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
         }
 
         .logo-icon {
-            width: 48px;
-            height: 48px;
+            width: 60px;
+            height: 60px;
             background: linear-gradient(135deg, #6366f1, #ec4899);
-            border-radius: 16px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            transform: rotate(-5deg);
-            box-shadow: 0 10px 20px -5px rgba(236, 72, 153, 0.5);
+            font-size: 28px;
+            transform: rotate(-5deg) scale(1);
+            animation: logoFloat 3s ease-in-out infinite;
+            box-shadow: 0 15px 30px -8px rgba(236, 72, 153, 0.6);
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: rotate(-5deg) scale(1); }
+            50% { transform: rotate(-5deg) scale(1.05); }
         }
 
         .logo-text {
-            font-size: 2rem;
-            font-weight: 800;
+            font-family: 'Clash Display', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
             letter-spacing: -0.02em;
             background: linear-gradient(135deg, #fff, #cbd5e1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            position: relative;
         }
 
         .logo-text span {
             background: linear-gradient(135deg, #6366f1, #ec4899);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+            animation: textPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes textPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
         }
 
         .header-stats {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .header-stat {
             text-align: right;
+            position: relative;
+            overflow: hidden;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.3s ease;
+        }
+
+        .header-stat:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
         }
 
         .header-stat-label {
-            font-size: 0.875rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
             color: #94a3b8;
             margin-bottom: 0.25rem;
         }
 
         .header-stat-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #fff, #cbd5e1);
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #94a3b8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            line-height: 1;
+            position: relative;
+            display: inline-block;
         }
 
-        /* Controls Bar */
-        .controls-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .header-stat-value::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #6366f1, transparent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .header-stat:hover .header-stat-value::after {
+            transform: scaleX(1);
+        }
+
+        /* Search Section */
+        .search-section {
             margin-bottom: 2.5rem;
-            padding: 1rem 1.5rem;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-radius: 100px;
-            backdrop-filter: blur(10px);
+            position: relative;
         }
 
         .search-wrapper {
+            max-width: 500px;
+            margin: 0 auto;
             position: relative;
-            flex: 1;
-            max-width: 300px;
+            animation: searchAppear 0.5s ease-out;
+        }
+
+        @keyframes searchAppear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .search-icon {
             position: absolute;
-            left: 16px;
+            left: 20px;
             top: 50%;
             transform: translateY(-50%);
-            color: #94a3b8;
-            font-size: 1rem;
+            color: #6366f1;
+            font-size: 1.2rem;
+            z-index: 2;
+            animation: searchIcon 2s ease-in-out infinite;
+        }
+
+        @keyframes searchIcon {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.1); }
         }
 
         .search-input {
             width: 100%;
-            padding: 0.875rem 1rem 0.875rem 3rem;
-            background: rgba(255, 255, 255, 0.03);
+            padding: 1.2rem 1.5rem 1.2rem 3.5rem;
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 40px;
+            border-radius: 60px;
             color: #fff;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.5);
         }
 
         .search-input:focus {
             outline: none;
             border-color: #6366f1;
             background: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15), 0 20px 40px -20px rgba(99, 102, 241, 0.5);
+            transform: scale(1.02);
         }
 
-        .filter-group {
+        .search-input::placeholder {
+            color: #64748b;
+            font-weight: 300;
+        }
+
+        .search-clear {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.2s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .search-input:not(:placeholder-shown) + .search-clear {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .search-clear:hover {
+            color: #fff;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        /* Filter Pills */
+        .filter-pills {
             display: flex;
-            gap: 0.5rem;
-            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
         }
 
-        .filter-btn {
-            padding: 0.625rem 1.25rem;
-            background: rgba(255, 255, 255, 0.03);
+        .filter-pill {
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 30px;
+            border-radius: 40px;
             color: #94a3b8;
             font-weight: 500;
             font-size: 0.9rem;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             gap: 8px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
         }
 
-        .filter-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
+        .filter-pill::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 100%);
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease;
+        }
+
+        .filter-pill:hover::before {
+            width: 200px;
+            height: 200px;
+        }
+
+        .filter-pill:hover {
             color: #fff;
+            border-color: #6366f1;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px #6366f1;
         }
 
-        .filter-btn.active {
+        .filter-pill.active {
             background: linear-gradient(135deg, #6366f1, #ec4899);
             color: #fff;
             border-color: transparent;
+            animation: pillActive 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .view-toggle {
-            display: flex;
-            gap: 4px;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 4px;
-            border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .view-option {
-            padding: 0.5rem 1rem;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            color: #94a3b8;
-        }
-
-        .view-option.active {
-            background: linear-gradient(135deg, #6366f1, #ec4899);
-            color: #fff;
+        @keyframes pillActive {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         /* Tier List Container */
         .tier-list {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 3rem;
+            gap: 1.5rem;
+            margin: 3rem 0;
+            perspective: 1000px;
         }
 
         /* Tier Row */
@@ -265,94 +434,203 @@
             display: flex;
             gap: 1rem;
             background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            padding: 1rem;
             backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            padding: 1.25rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: tierAppear 0.5s ease-out;
+            animation-fill-mode: both;
+            transform-origin: center;
         }
 
         .tier-row:hover {
-            background: rgba(255, 255, 255, 0.03);
-            border-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 30px 50px -20px rgba(99, 102, 241, 0.5);
         }
+
+        @keyframes tierAppear {
+            from {
+                opacity: 0;
+                transform: translateY(30px) rotateX(-10deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        /* Stagger animation for tiers */
+        .tier-row:nth-child(1) { animation-delay: 0.1s; }
+        .tier-row:nth-child(2) { animation-delay: 0.15s; }
+        .tier-row:nth-child(3) { animation-delay: 0.2s; }
+        .tier-row:nth-child(4) { animation-delay: 0.25s; }
+        .tier-row:nth-child(5) { animation-delay: 0.3s; }
+        .tier-row:nth-child(6) { animation-delay: 0.35s; }
+        .tier-row:nth-child(7) { animation-delay: 0.4s; }
+        .tier-row:nth-child(8) { animation-delay: 0.45s; }
+        .tier-row:nth-child(9) { animation-delay: 0.5s; }
 
         /* Tier Label */
         .tier-label {
-            width: 100px;
+            width: 120px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 4px;
-            border-radius: 16px;
+            gap: 6px;
+            border-radius: 24px;
             font-weight: 800;
             position: relative;
             overflow: hidden;
+            transition: all 0.3s ease;
         }
 
         .tier-label::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
             pointer-events: none;
         }
 
+        .tier-row:hover .tier-label::before {
+            opacity: 1;
+            animation: labelShine 1.5s linear infinite;
+        }
+
+        @keyframes labelShine {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
         .tier-label .tier-letter {
-            font-size: 2.5rem;
+            font-size: 3rem;
             line-height: 1;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            font-weight: 900;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            animation: letterGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes letterGlow {
+            0%, 100% { text-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+            50% { text-shadow: 0 4px 25px currentColor; }
         }
 
         .tier-label .tier-name {
             font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.15em;
             opacity: 0.9;
+            font-weight: 600;
         }
 
         .tier-label .tier-count {
             font-size: 0.8rem;
             background: rgba(0,0,0,0.3);
-            padding: 2px 8px;
-            border-radius: 20px;
-            margin-top: 4px;
+            padding: 4px 12px;
+            border-radius: 30px;
+            margin-top: 6px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
         }
 
-        /* Tier Colors with Gradients */
-        .tier-label.sss { background: linear-gradient(135deg, #ffd700, #fbbf24); }
-        .tier-label.ss { background: linear-gradient(135deg, #c0c0c0, #94a3b8); }
-        .tier-label.s { background: linear-gradient(135deg, #cd7f32, #b45309); }
-        .tier-label.a { background: linear-gradient(135deg, #4ecdc4, #14b8a6); }
-        .tier-label.b { background: linear-gradient(135deg, #4caf50, #22c55e); }
-        .tier-label.c { background: linear-gradient(135deg, #2196f3, #3b82f6); }
-        .tier-label.d { background: linear-gradient(135deg, #9c27b0, #a855f7); }
-        .tier-label.e { background: linear-gradient(135deg, #ff9800, #f97316); }
-        .tier-label.f { background: linear-gradient(135deg, #f44336, #ef4444); }
+        .tier-row:hover .tier-count {
+            background: rgba(0,0,0,0.5);
+            transform: scale(1.05);
+        }
+
+        /* Tier Colors with Animated Gradients */
+        .tier-label.sss { 
+            background: linear-gradient(135deg, #ffd700, #fbbf24, #f59e0b);
+            background-size: 200% 200%;
+            animation: gradientMove 3s ease infinite;
+        }
+        .tier-label.ss { 
+            background: linear-gradient(135deg, #c0c0c0, #94a3b8, #64748b);
+            background-size: 200% 200%;
+            animation: gradientMove 3s ease infinite;
+        }
+        .tier-label.s { 
+            background: linear-gradient(135deg, #cd7f32, #b45309, #92400e);
+            background-size: 200% 200%;
+            animation: gradientMove 3s ease infinite;
+        }
+        .tier-label.a { 
+            background: linear-gradient(135deg, #4ecdc4, #14b8a6, #0d9488);
+            background-size: 200% 200%;
+            animation: gradientMove 3s ease infinite;
+        }
+        .tier-label.b { 
+            background: linear-gradient(135deg, #4caf50, #22c55e, #16a34a);
+            background-size: 200% 200%;
+            animation: gradientMove 3s ease infinite;
+        }
+        .tier-label.c { 
+            background: linear-gradient(135deg, #2196f3, #3b82f6, #2563eb);
+            background-size: 200% 200%;
+            animation: gradientMove 3s ease infinite;
+        }
+        .tier-label.d { 
+            background: linear-gradient(135deg, #9c27b0, #a855f7, #9333ea);
+            background-size: 200% 200%;
+            animation: gradientMove 3s ease infinite;
+        }
+        .tier-label.e { 
+            background: linear-gradient(135deg, #ff9800, #f97316, #ea580c);
+            background-size: 200% 200%;
+            animation: gradientMove 3s ease infinite;
+        }
+        .tier-label.f { 
+            background: linear-gradient(135deg, #f44336, #ef4444, #dc2626);
+            background-size: 200% 200%;
+            animation: gradientMove 3s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
 
         /* Players Grid */
         .players-grid {
             flex: 1;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 0.75rem;
         }
 
         /* Player Card */
         .player-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 1rem;
-            transition: all 0.2s ease;
+            border-radius: 20px;
+            padding: 1.25rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            animation: cardAppear 0.5s ease-out;
+            animation-fill-mode: both;
+            cursor: pointer;
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
 
         .player-card::before {
@@ -363,32 +641,79 @@
             right: 0;
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--tier-color), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .player-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--tier-color) 0%, transparent 70%);
             opacity: 0;
             transition: opacity 0.3s ease;
+            pointer-events: none;
+            filter: blur(30px);
         }
 
         .player-card:hover::before {
-            opacity: 1;
+            transform: translateX(100%);
+        }
+
+        .player-card:hover::after {
+            opacity: 0.15;
         }
 
         .player-card:hover {
             background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.5);
+            border-color: var(--tier-color);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 30px -15px rgba(0, 0, 0, 0.5);
         }
+
+        /* Stagger card animations */
+        .player-card:nth-child(1) { animation-delay: 0.1s; }
+        .player-card:nth-child(2) { animation-delay: 0.15s; }
+        .player-card:nth-child(3) { animation-delay: 0.2s; }
+        .player-card:nth-child(4) { animation-delay: 0.25s; }
+        .player-card:nth-child(5) { animation-delay: 0.3s; }
+        .player-card:nth-child(6) { animation-delay: 0.35s; }
+        .player-card:nth-child(7) { animation-delay: 0.4s; }
+        .player-card:nth-child(8) { animation-delay: 0.45s; }
 
         .player-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
         }
 
         .player-name {
             font-weight: 700;
             font-size: 1.1rem;
             color: #fff;
+            position: relative;
+            display: inline-block;
+        }
+
+        .player-name::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--tier-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .player-card:hover .player-name::after {
+            transform: scaleX(1);
         }
 
         .player-tier-badge {
@@ -396,28 +721,51 @@
             font-weight: 600;
             padding: 0.25rem 0.75rem;
             border-radius: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--tier-color);
+            color: var(--tier-color);
+            transition: all 0.3s ease;
+        }
+
+        .player-card:hover .player-tier-badge {
+            background: var(--tier-color);
+            color: #fff;
+            transform: rotate(2deg) scale(1.05);
         }
 
         .player-kit {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #94a3b8;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .player-card:hover .player-kit {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
         }
 
         .player-kit-icon {
-            width: 24px;
-            height: 24px;
-            background: rgba(99, 102, 241, 0.2);
-            border-radius: 8px;
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            animation: kitIcon 2s ease-in-out infinite;
+        }
+
+        @keyframes kitIcon {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(5deg) scale(1.05); }
         }
 
         .player-stats {
@@ -429,88 +777,99 @@
 
         .stat {
             flex: 1;
+            text-align: center;
+            padding: 0.5rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.3s ease;
+        }
+
+        .player-card:hover .stat {
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .stat-label {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #64748b;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
         }
 
         .stat-value {
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 1.1rem;
+            font-weight: 700;
             color: #fff;
+            transition: all 0.3s ease;
         }
 
-        /* Empty State */
+        .player-card:hover .stat-value {
+            transform: scale(1.1);
+        }
+
+        /* Empty Tier */
         .empty-tier {
             flex: 1;
             text-align: center;
-            padding: 2rem;
+            padding: 2.5rem;
             color: #64748b;
             font-style: italic;
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 16px;
+            border-radius: 20px;
             border: 1px dashed rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
 
-        /* Action Buttons */
-        .player-actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-
-        .player-card:hover .player-actions {
-            opacity: 1;
-        }
-
-        .action-btn {
-            flex: 1;
-            padding: 0.5rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-        }
-
-        .action-btn.promote {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-        }
-
-        .action-btn.demote {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-        }
-
-        .action-btn:hover {
-            filter: brightness(1.1);
-            transform: translateY(-1px);
-        }
-
-        .action-btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
+        .empty-tier:hover {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: scale(1.01);
         }
 
         /* Footer */
         .footer {
-            margin-top: 4rem;
+            margin-top: 5rem;
             padding: 2rem;
             text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-stat {
+            text-align: center;
+        }
+
+        .footer-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-stat-label {
+            font-size: 0.75rem;
+            color: #64748b;
+            text-transform: uppercase;
+        }
+
+        .footer-text {
             color: #64748b;
             font-size: 0.9rem;
-            position: relative;
+            margin-bottom: 1rem;
         }
 
         .footer-glow {
@@ -518,33 +877,59 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 200px;
+            width: 300px;
             height: 1px;
             background: linear-gradient(90deg, transparent, #6366f1, #ec4899, transparent);
+            animation: footerGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes footerGlow {
+            0%, 100% { width: 300px; opacity: 0.5; }
+            50% { width: 500px; opacity: 1; }
+        }
+
+        /* Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #6366f1;
+            border-radius: 50%;
+            animation: particleFloat 10s linear infinite;
+        }
+
+        @keyframes particleFloat {
+            from {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(-100vh) scale(1);
+                opacity: 1;
+            }
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             .header {
                 flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-
-            .header-stats {
-                flex-direction: row;
-                justify-content: center;
-            }
-
-            .controls-bar {
-                flex-direction: column;
-                gap: 1rem;
-                border-radius: 24px;
+                gap: 1.5rem;
                 padding: 1.5rem;
             }
 
-            .search-wrapper {
-                max-width: 100%;
+            .header-stats {
+                width: 100%;
+                justify-content: space-around;
             }
 
             .tier-row {
@@ -553,28 +938,59 @@
 
             .tier-label {
                 width: 100%;
-                padding: 1rem;
+                padding: 1.5rem;
                 flex-direction: row;
                 justify-content: space-between;
             }
 
             .tier-label .tier-letter {
-                font-size: 1.5rem;
+                font-size: 2rem;
+            }
+
+            .filter-pills {
+                flex-wrap: wrap;
+            }
+
+            .filter-pill {
+                flex: 1 1 calc(50% - 0.5rem);
+                justify-content: center;
             }
         }
 
         /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255,255,255,0.1);
-            border-top-color: #6366f1;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0b0f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeOut 1s ease-out 2s forwards;
+            pointer-events: none;
         }
 
-        @keyframes spin {
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 3px solid rgba(99, 102, 241, 0.1);
+            border-top-color: #6366f1;
+            border-right-color: #ec4899;
+            border-radius: 50%;
+            animation: spinner 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes spinner {
             to { transform: rotate(360deg); }
         }
 
@@ -598,9 +1014,19 @@
     </style>
 </head>
 <body>
-    <div class="bg-orb"></div>
+    <!-- Loading Animation -->
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="bg-orb-1"></div>
     <div class="bg-orb-2"></div>
-    <div class="grid-pattern"></div>
+    <div class="bg-orb-3"></div>
+    <div class="grid-overlay"></div>
+
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
 
     <div class="container">
         <!-- Header -->
@@ -625,26 +1051,45 @@
             </div>
         </header>
 
-        <!-- Controls -->
-        <div class="controls-bar">
+        <!-- Search Section -->
+        <div class="search-section">
             <div class="search-wrapper">
                 <span class="search-icon">🔍</span>
-                <input type="text" class="search-input" placeholder="Search warriors..." id="searchInput" oninput="filterPlayers()">
+                <input type="text" class="search-input" placeholder="Search warriors by name..." id="searchInput" oninput="filterPlayers()">
+                <span class="search-clear" onclick="clearSearch()">✕</span>
             </div>
-            <div class="filter-group">
-                <button class="filter-btn" onclick="sortPlayers('tier')" id="sortTier">
-                    <span>🏆</span> By Tier
-                </button>
-                <button class="filter-btn" onclick="sortPlayers('wins')" id="sortWins">
-                    <span>⚡</span> By Wins
-                </button>
-                <button class="filter-btn" onclick="sortPlayers('kills')" id="sortKills">
-                    <span>💀</span> By Kills
-                </button>
-            </div>
-            <div class="view-toggle">
-                <span class="view-option active" onclick="setViewMode('grid')">Grid</span>
-                <span class="view-option" onclick="setViewMode('list')">List</span>
+
+            <div class="filter-pills">
+                <div class="filter-pill active" onclick="filterByTier('all')" id="filterAll">
+                    <span>🏆</span> All
+                </div>
+                <div class="filter-pill" onclick="filterByTier('SSS')" id="filterSSS">
+                    <span>👑</span> SSS
+                </div>
+                <div class="filter-pill" onclick="filterByTier('SS')" id="filterSS">
+                    <span>⚡</span> SS
+                </div>
+                <div class="filter-pill" onclick="filterByTier('S')" id="filterS">
+                    <span>💫</span> S
+                </div>
+                <div class="filter-pill" onclick="filterByTier('A')" id="filterA">
+                    <span>💎</span> A
+                </div>
+                <div class="filter-pill" onclick="filterByTier('B')" id="filterB">
+                    <span>🥇</span> B
+                </div>
+                <div class="filter-pill" onclick="filterByTier('C')" id="filterC">
+                    <span>🥈</span> C
+                </div>
+                <div class="filter-pill" onclick="filterByTier('D')" id="filterD">
+                    <span>🥉</span> D
+                </div>
+                <div class="filter-pill" onclick="filterByTier('E')" id="filterE">
+                    <span>🪵</span> E
+                </div>
+                <div class="filter-pill" onclick="filterByTier('F')" id="filterF">
+                    <span>🪨</span> F
+                </div>
             </div>
         </div>
 
@@ -653,8 +1098,24 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <p>⚔️ MINECRAFT PVP TIER LIST • RANKINGS BASED ON SKILL & ACHIEVEMENTS ⚔️</p>
-            <p style="margin-top: 0.5rem; font-size: 0.8rem;">Last updated: <span id="lastUpdate">just now</span></p>
+            <div class="footer-content">
+                <div class="footer-stats">
+                    <div class="footer-stat">
+                        <div class="footer-stat-value" id="footerTotalPlayers">0</div>
+                        <div class="footer-stat-label">Warriors</div>
+                    </div>
+                    <div class="footer-stat">
+                        <div class="footer-stat-value" id="footerTotalKills">0</div>
+                        <div class="footer-stat-label">Total Kills</div>
+                    </div>
+                    <div class="footer-stat">
+                        <div class="footer-stat-value" id="footerAvgKills">0</div>
+                        <div class="footer-stat-label">Avg Kills</div>
+                    </div>
+                </div>
+                <div class="footer-text">⚔️ MINECRAFT ELITE PVP RANKINGS • SEASON 8 ⚔️</div>
+                <div class="footer-text" style="font-size: 0.8rem;">Last updated: <span id="lastUpdate">just now</span></div>
+            </div>
             <div class="footer-glow"></div>
         </footer>
     </div>
@@ -663,59 +1124,62 @@
         // Player data - Edit this manually to add/remove players
         const players = [
             // SSS TIER - GODLY
-            { id: 1, name: 'Technoblade', tier: 'SSS', kit: 'Pot PvP', wins: 5000, kills: 25000 },
-            { id: 2, name: 'Huahwi', tier: 'SSS', kit: 'Soup', wins: 4800, kills: 22000 },
+            { id: 1, name: 'Technoblade', tier: 'SSS', kit: 'Pot PvP Master', wins: 5234, kills: 27450 },
+            { id: 2, name: 'Huahwi', tier: 'SSS', kit: 'Soup Legend', wins: 4890, kills: 23800 },
+            { id: 3, name: 'Stimpy', tier: 'SSS', kit: 'NoDebuff God', wins: 4712, kills: 22600 },
             
             // SS TIER - ELITE
-            { id: 3, name: 'Dream', tier: 'SS', kit: 'Speed Runner', wins: 3500, kills: 15000 },
-            { id: 4, name: 'Stimpy', tier: 'SS', kit: 'NoDebuff', wins: 3200, kills: 14000 },
+            { id: 4, name: 'Dream', tier: 'SS', kit: 'Speed Runner', wins: 3520, kills: 15800 },
+            { id: 5, name: 'TechnoBlade', tier: 'SS', kit: 'Crystal PvP', wins: 3410, kills: 14900 },
+            { id: 6, name: 'iReapZz', tier: 'SS', kit: 'Pot PvP', wins: 3280, kills: 14100 },
             
             // S TIER - LEGENDARY
-            { id: 5, name: 'iReapZz', tier: 'S', kit: 'Pot PvP', wins: 2800, kills: 12000 },
-            { id: 6, name: 'Sxippy', tier: 'S', kit: 'Soup', wins: 2600, kills: 11000 },
+            { id: 7, name: 'Sxippy', tier: 'S', kit: 'Soup', wins: 2650, kills: 11800 },
+            { id: 8, name: 'ClutchGod', tier: 'S', kit: 'Build UHC', wins: 2590, kills: 11200 },
+            { id: 9, name: 'PvPWizard', tier: 'S', kit: 'Combo', wins: 2480, kills: 10800 },
             
             // A TIER - DIAMOND
-            { id: 7, name: 'ClutchGod', tier: 'A', kit: 'Build UHC', wins: 2000, kills: 8000 },
-            { id: 8, name: 'PvPWizard', tier: 'A', kit: 'Combo', wins: 1900, kills: 7500 },
+            { id: 10, name: 'CrystalMethod', tier: 'A', kit: 'Crystal', wins: 1950, kills: 8200 },
+            { id: 11, name: 'AidenTK', tier: 'A', kit: 'AxE', wins: 1880, kills: 7900 },
+            { id: 12, name: 'TigerBoy', tier: 'A', kit: 'OP Kit', wins: 1760, kills: 7500 },
             
             // B TIER - GOLD
-            { id: 9, name: 'CrystalMethod', tier: 'B', kit: 'Crystal', wins: 1500, kills: 6000 },
-            { id: 10, name: 'AidenTK', tier: 'B', kit: 'AxE', wins: 1400, kills: 5500 },
+            { id: 13, name: 'NoobMaster', tier: 'B', kit: 'Default', wins: 1250, kills: 5200 },
+            { id: 14, name: 'BedwarsMain', tier: 'B', kit: 'Bridge', wins: 1180, kills: 4900 },
+            { id: 15, name: 'FirstTimer', tier: 'B', kit: 'Wood Sword', wins: 980, kills: 4100 },
             
             // C TIER - IRON
-            { id: 11, name: 'TigerBoy', tier: 'C', kit: 'OP Kit', wins: 1000, kills: 4000 },
+            { id: 16, name: 'CraftKing', tier: 'C', kit: 'Iron Set', wins: 650, kills: 2800 },
+            { id: 17, name: 'MineMaster', tier: 'C', kit: 'Diamond', wins: 590, kills: 2500 },
             
             // D TIER - STONE
-            { id: 12, name: 'NoobMaster', tier: 'D', kit: 'Default', wins: 500, kills: 2000 },
+            { id: 18, name: 'BlockBuilder', tier: 'D', kit: 'Stone Tools', wins: 320, kills: 1400 },
             
             // E TIER - WOOD
-            { id: 13, name: 'BedwarsMain', tier: 'E', kit: 'Bridge', wins: 200, kills: 800 },
+            { id: 19, name: 'WoodenSword', tier: 'E', kit: 'Wood Gear', wins: 120, kills: 500 },
             
             // F TIER - NOOB
-            { id: 14, name: 'FirstTimer', tier: 'F', kit: 'Wood Sword', wins: 50, kills: 100 },
+            { id: 20, name: 'FirstDay', tier: 'F', kit: 'Fists', wins: 15, kills: 45 },
         ];
 
         // Don't modify below this line unless you know what you're doing
-        let currentSort = 'tier';
         let searchTerm = '';
-        let viewMode = 'grid';
+        let filterTier = 'all';
 
         const tiers = ['SSS', 'SS', 'S', 'A', 'B', 'C', 'D', 'E', 'F'];
 
-        // Save to localStorage (optional - for dynamic changes)
-        function saveToStorage() {
-            localStorage.setItem('pvp-tiers-data', JSON.stringify(players));
-        }
-
-        // Load from localStorage if exists
-        function loadFromStorage() {
-            const saved = localStorage.getItem('pvp-tiers-data');
-            if (saved) {
-                // This will override the manual data if you want to save changes
-                // Comment this out if you want to always use manual data
-                // Object.assign(players, JSON.parse(saved));
+        // Create particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                particle.style.background = `rgba(${99 + Math.random() * 100}, ${102 + Math.random() * 100}, 241, ${0.2 + Math.random() * 0.3})`;
+                particlesContainer.appendChild(particle);
             }
-            renderTierList();
         }
 
         // Filter players
@@ -724,139 +1188,43 @@
             renderTierList();
         }
 
-        // Sort players
-        function sortPlayers(type) {
-            currentSort = type;
-            
-            // Update active button styles
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`sort${type.charAt(0).toUpperCase() + type.slice(1)}`).classList.add('active');
-            
+        // Clear search
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            searchTerm = '';
             renderTierList();
         }
 
-        // Set view mode
-        function setViewMode(mode) {
-            viewMode = mode;
-            document.querySelectorAll('.view-option').forEach(opt => opt.classList.remove('active'));
-            event.target.classList.add('active');
+        // Filter by tier
+        function filterByTier(tier) {
+            filterTier = tier;
+            
+            // Update active pill
+            document.querySelectorAll('.filter-pill').forEach(pill => pill.classList.remove('active'));
+            document.getElementById(`filter${tier === 'all' ? 'All' : tier}`).classList.add('active');
+            
             renderTierList();
-        }
-
-        // Promote player
-        function promotePlayer(id) {
-            const player = players.find(p => p.id === id);
-            const currentIndex = tiers.indexOf(player.tier);
-            if (currentIndex > 0) {
-                player.tier = tiers[currentIndex - 1];
-                saveToStorage();
-                renderTierList();
-            }
-        }
-
-        // Demote player
-        function demotePlayer(id) {
-            const player = players.find(p => p.id === id);
-            const currentIndex = tiers.indexOf(player.tier);
-            if (currentIndex < tiers.length - 1) {
-                player.tier = tiers[currentIndex + 1];
-                saveToStorage();
-                renderTierList();
-            }
         }
 
         // Update stats
         function updateStats() {
-            document.getElementById('totalPlayers').textContent = players.length;
-            document.getElementById('sssPlayers').textContent = players.filter(p => p.tier === 'SSS').length;
-            
+            const totalPlayers = players.length;
+            const sssPlayers = players.filter(p => p.tier === 'SSS').length;
             const totalKills = players.reduce((sum, p) => sum + p.kills, 0);
+            const avgKills = Math.round(totalKills / totalPlayers);
+
+            document.getElementById('totalPlayers').textContent = totalPlayers;
+            document.getElementById('sssPlayers').textContent = sssPlayers;
             document.getElementById('totalKills').textContent = totalKills.toLocaleString();
+            
+            document.getElementById('footerTotalPlayers').textContent = totalPlayers;
+            document.getElementById('footerTotalKills').textContent = totalKills.toLocaleString();
+            document.getElementById('footerAvgKills').textContent = avgKills.toLocaleString();
+            
             document.getElementById('lastUpdate').textContent = new Date().toLocaleString();
         }
 
-        // Render tier list
-        function renderTierList() {
-            // Filter players
-            let filteredPlayers = players.filter(p => 
-                p.name.toLowerCase().includes(searchTerm)
-            );
-
-            // Sort players
-            filteredPlayers.sort((a, b) => {
-                switch(currentSort) {
-                    case 'wins':
-                        return b.wins - a.wins;
-                    case 'kills':
-                        return b.kills - a.kills;
-                    case 'tier':
-                    default:
-                        return tiers.indexOf(a.tier) - tiers.indexOf(b.tier);
-                }
-            });
-
-            // Group by tier
-            const grouped = {};
-            tiers.forEach(tier => grouped[tier] = filteredPlayers.filter(p => p.tier === tier));
-
-            // Generate HTML
-            let html = '';
-            
-            tiers.forEach(tier => {
-                const tierPlayers = grouped[tier] || [];
-                const tierClass = tier.toLowerCase();
-                
-                html += `
-                    <div class="tier-row">
-                        <div class="tier-label ${tierClass}">
-                            <span class="tier-letter">${tier}</span>
-                            <span class="tier-name">${getTierName(tier)}</span>
-                            <span class="tier-count">${tierPlayers.length}</span>
-                        </div>
-                        <div class="players-grid" style="grid-template-columns: ${viewMode === 'list' ? '1fr' : 'repeat(auto-fill, minmax(280px, 1fr))'}">
-                `;
-
-                if (tierPlayers.length === 0) {
-                    html += `<div class="empty-tier">⚔️ No warriors in ${tier} tier</div>`;
-                } else {
-                    tierPlayers.forEach(player => {
-                        html += `
-                            <div class="player-card" style="--tier-color: ${getTierColor(player.tier)}">
-                                <div class="player-header">
-                                    <span class="player-name">${player.name}</span>
-                                    <span class="player-tier-badge">${player.tier}</span>
-                                </div>
-                                <div class="player-kit">
-                                    <span class="player-kit-icon">⚔️</span>
-                                    ${player.kit}
-                                </div>
-                                <div class="player-stats">
-                                    <div class="stat">
-                                        <div class="stat-label">Wins</div>
-                                        <div class="stat-value">${player.wins.toLocaleString()}</div>
-                                    </div>
-                                    <div class="stat">
-                                        <div class="stat-label">Kills</div>
-                                        <div class="stat-value">${player.kills.toLocaleString()}</div>
-                                    </div>
-                                </div>
-                                <div class="player-actions">
-                                    <button class="action-btn promote" onclick="promotePlayer(${player.id})" ${tier === 'SSS' ? 'disabled' : ''}>⬆️ Promote</button>
-                                    <button class="action-btn demote" onclick="demotePlayer(${player.id})" ${tier === 'F' ? 'disabled' : ''}>⬇️ Demote</button>
-                                </div>
-                            </div>
-                        `;
-                    });
-                }
-
-                html += `</div></div>`;
-            });
-
-            document.getElementById('tierList').innerHTML = html;
-            updateStats();
-        }
-
-        // Helper function for tier names
+        // Get tier name
         function getTierName(tier) {
             const names = {
                 'SSS': 'GODLY',
@@ -872,7 +1240,7 @@
             return names[tier] || tier;
         }
 
-        // Helper function for tier colors
+        // Get tier color
         function getTierColor(tier) {
             const colors = {
                 'SSS': '#ffd700',
@@ -888,8 +1256,79 @@
             return colors[tier] || '#94a3b8';
         }
 
+        // Render tier list
+        function renderTierList() {
+            // Filter players
+            let filteredPlayers = players.filter(p => 
+                p.name.toLowerCase().includes(searchTerm)
+            );
+
+            // Apply tier filter
+            if (filterTier !== 'all') {
+                filteredPlayers = filteredPlayers.filter(p => p.tier === filterTier);
+            }
+
+            // Group by tier
+            const grouped = {};
+            tiers.forEach(tier => grouped[tier] = filteredPlayers.filter(p => p.tier === tier));
+
+            // Generate HTML
+            let html = '';
+            
+            tiers.forEach(tier => {
+                const tierPlayers = grouped[tier] || [];
+                const tierClass = tier.toLowerCase();
+                const tierColor = getTierColor(tier);
+                
+                html += `
+                    <div class="tier-row">
+                        <div class="tier-label ${tierClass}">
+                            <span class="tier-letter">${tier}</span>
+                            <span class="tier-name">${getTierName(tier)}</span>
+                            <span class="tier-count">${tierPlayers.length}</span>
+                        </div>
+                        <div class="players-grid">
+                `;
+
+                if (tierPlayers.length === 0) {
+                    html += `<div class="empty-tier">⚔️ No warriors in ${tier} tier</div>`;
+                } else {
+                    tierPlayers.forEach(player => {
+                        html += `
+                            <div class="player-card" style="--tier-color: ${tierColor}">
+                                <div class="player-header">
+                                    <span class="player-name">${player.name}</span>
+                                    <span class="player-tier-badge" style="border-color: ${tierColor}; color: ${tierColor}">${player.tier}</span>
+                                </div>
+                                <div class="player-kit">
+                                    <span class="player-kit-icon">⚔️</span>
+                                    ${player.kit}
+                                </div>
+                                <div class="player-stats">
+                                    <div class="stat">
+                                        <div class="stat-label">Wins</div>
+                                        <div class="stat-value">${player.wins.toLocaleString()}</div>
+                                    </div>
+                                    <div class="stat">
+                                        <div class="stat-label">Kills</div>
+                                        <div class="stat-value">${player.kills.toLocaleString()}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+
+                html += `</div></div>`;
+            });
+
+            document.getElementById('tierList').innerHTML = html;
+            updateStats();
+        }
+
         // Initialize
-        loadFromStorage();
+        createParticles();
+        renderTierList();
     </script>
 </body>
 </html>
