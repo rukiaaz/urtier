@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PVP TIERS • MINECRAFT ELITE RANKINGS</title>
+    <title>CVLxUR • TEAM TIER LIST</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -31,12 +31,6 @@
             width: 100%;
             height: 100%;
             z-index: -2;
-        }
-
-        .gradient-bg svg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
         }
 
         .bg-orb-1 {
@@ -251,22 +245,6 @@
             display: inline-block;
         }
 
-        .header-stat-value::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #6366f1, transparent);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .header-stat:hover .header-stat-value::after {
-            transform: scaleX(1);
-        }
-
         /* Search Section */
         .search-section {
             margin-bottom: 2.5rem;
@@ -418,6 +396,65 @@
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
+        }
+
+        /* Team Message */
+        .team-message {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 30px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            animation: messageGlow 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-message::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+            animation: messageRotate 10s linear infinite;
+        }
+
+        @keyframes messageRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes messageGlow {
+            0%, 100% { box-shadow: 0 0 30px rgba(99, 102, 241, 0.3); }
+            50% { box-shadow: 0 0 50px rgba(236, 72, 153, 0.4); }
+        }
+
+        .team-message h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .team-message p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .team-message .highlight {
+            color: #6366f1;
+            font-weight: 600;
         }
 
         /* Tier List Container */
@@ -604,7 +641,7 @@
         .players-grid {
             flex: 1;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 0.75rem;
         }
 
@@ -612,14 +649,15 @@
         .player-card {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 1.25rem;
+            border-radius: 16px;
+            padding: 1rem;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
             animation: cardAppear 0.5s ease-out;
             animation-fill-mode: both;
             cursor: pointer;
+            text-align: center;
         }
 
         @keyframes cardAppear {
@@ -674,38 +712,22 @@
             box-shadow: 0 20px 30px -15px rgba(0, 0, 0, 0.5);
         }
 
-        /* Stagger card animations */
-        .player-card:nth-child(1) { animation-delay: 0.1s; }
-        .player-card:nth-child(2) { animation-delay: 0.15s; }
-        .player-card:nth-child(3) { animation-delay: 0.2s; }
-        .player-card:nth-child(4) { animation-delay: 0.25s; }
-        .player-card:nth-child(5) { animation-delay: 0.3s; }
-        .player-card:nth-child(6) { animation-delay: 0.35s; }
-        .player-card:nth-child(7) { animation-delay: 0.4s; }
-        .player-card:nth-child(8) { animation-delay: 0.45s; }
-
-        .player-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
         .player-name {
-            font-weight: 700;
-            font-size: 1.1rem;
+            font-weight: 600;
+            font-size: 1rem;
             color: #fff;
             position: relative;
             display: inline-block;
+            padding: 0.25rem 0;
         }
 
         .player-name::after {
             content: '';
             position: absolute;
-            bottom: -2px;
+            bottom: 0;
             left: 0;
             width: 100%;
-            height: 2px;
+            height: 1px;
             background: var(--tier-color);
             transform: scaleX(0);
             transform-origin: left;
@@ -717,119 +739,39 @@
         }
 
         .player-tier-badge {
+            display: inline-block;
             font-size: 0.7rem;
             font-weight: 600;
-            padding: 0.25rem 0.75rem;
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.75rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--tier-color);
             color: var(--tier-color);
+            margin-top: 0.5rem;
             transition: all 0.3s ease;
         }
 
         .player-card:hover .player-tier-badge {
             background: var(--tier-color);
             color: #fff;
-            transform: rotate(2deg) scale(1.05);
-        }
-
-        .player-kit {
-            font-size: 0.9rem;
-            color: #94a3b8;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 0.5rem;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .player-card:hover .player-kit {
-            background: rgba(255, 255, 255, 0.05);
-            color: #fff;
-        }
-
-        .player-kit-icon {
-            width: 28px;
-            height: 28px;
-            background: linear-gradient(135deg, #6366f1, #ec4899);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            animation: kitIcon 2s ease-in-out infinite;
-        }
-
-        @keyframes kitIcon {
-            0%, 100% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(5deg) scale(1.05); }
-        }
-
-        .player-stats {
-            display: flex;
-            gap: 1rem;
-            padding-top: 0.75rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .stat {
-            flex: 1;
-            text-align: center;
-            padding: 0.5rem;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.02);
-            transition: all 0.3s ease;
-        }
-
-        .player-card:hover .stat {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .stat-label {
-            font-size: 0.65rem;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-value {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #fff;
-            transition: all 0.3s ease;
-        }
-
-        .player-card:hover .stat-value {
-            transform: scale(1.1);
         }
 
         /* Empty Tier */
         .empty-tier {
             flex: 1;
             text-align: center;
-            padding: 2.5rem;
+            padding: 2rem;
             color: #64748b;
             font-style: italic;
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 20px;
+            border-radius: 16px;
             border: 1px dashed rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .empty-tier:hover {
-            background: rgba(255, 255, 255, 0.03);
-            border-color: rgba(255, 255, 255, 0.1);
-            transform: scale(1.01);
         }
 
         /* Footer */
         .footer {
-            margin-top: 5rem;
+            margin-top: 4rem;
             padding: 2rem;
             text-align: center;
             position: relative;
@@ -869,7 +811,7 @@
         .footer-text {
             color: #64748b;
             font-size: 0.9rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .footer-glow {
@@ -952,8 +894,16 @@
             }
 
             .filter-pill {
-                flex: 1 1 calc(50% - 0.5rem);
+                flex: 1 1 calc(33.333% - 0.5rem);
                 justify-content: center;
+            }
+
+            .team-message h2 {
+                font-size: 1.5rem;
+            }
+
+            .team-message p {
+                font-size: 0.95rem;
             }
         }
 
@@ -1033,23 +983,26 @@
         <header class="header">
             <div class="logo">
                 <div class="logo-icon">⚔️</div>
-                <div class="logo-text">PVP <span>TIERS</span></div>
+                <div class="logo-text">CVLxUR <span>TEAM</span></div>
             </div>
             <div class="header-stats">
                 <div class="header-stat">
-                    <div class="header-stat-label">Total Warriors</div>
+                    <div class="header-stat-label">Total Members</div>
                     <div class="header-stat-value" id="totalPlayers">0</div>
                 </div>
                 <div class="header-stat">
                     <div class="header-stat-label">Elite (SSS)</div>
                     <div class="header-stat-value" id="sssPlayers">0</div>
                 </div>
-                <div class="header-stat">
-                    <div class="header-stat-label">Total Kills</div>
-                    <div class="header-stat-value" id="totalKills">0</div>
-                </div>
             </div>
         </header>
+
+        <!-- Team Message -->
+        <div class="team-message">
+            <h2>⚔️ SECOND TEAM • CVLxUR ⚔️</h2>
+            <p>If our team loses to another CVLxUR team, this team will replace us. No fights within the team — if we're against different teams, one team should leave so there's only one winner from our squad.</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;"><span class="highlight">X3N1AL</span> leads this division</p>
+        </div>
 
         <!-- Search Section -->
         <div class="search-section">
@@ -1105,15 +1058,11 @@
                         <div class="footer-stat-label">Warriors</div>
                     </div>
                     <div class="footer-stat">
-                        <div class="footer-stat-value" id="footerTotalKills">0</div>
-                        <div class="footer-stat-label">Total Kills</div>
-                    </div>
-                    <div class="footer-stat">
-                        <div class="footer-stat-value" id="footerAvgKills">0</div>
-                        <div class="footer-stat-label">Avg Kills</div>
+                        <div class="footer-stat-value" id="footerEliteCount">0</div>
+                        <div class="footer-stat-label">Elite (SSS+)</div>
                     </div>
                 </div>
-                <div class="footer-text">⚔️ MINECRAFT ELITE PVP RANKINGS • SEASON 8 ⚔️</div>
+                <div class="footer-text">⚔️ CVLxUR • SECOND TEAM ROSTER ⚔️</div>
                 <div class="footer-text" style="font-size: 0.8rem;">Last updated: <span id="lastUpdate">just now</span></div>
             </div>
             <div class="footer-glow"></div>
@@ -1121,48 +1070,73 @@
     </div>
 
     <script>
-        // Player data - Edit this manually to add/remove players
+        // Player data - All CVLxUR team members
         const players = [
-            // SSS TIER - GODLY
-            { id: 1, name: 'Technoblade', tier: 'SSS', kit: 'Pot PvP Master', wins: 5234, kills: 27450 },
-            { id: 2, name: 'Huahwi', tier: 'SSS', kit: 'Soup Legend', wins: 4890, kills: 23800 },
-            { id: 3, name: 'Stimpy', tier: 'SSS', kit: 'NoDebuff God', wins: 4712, kills: 22600 },
-            
-            // SS TIER - ELITE
-            { id: 4, name: 'Dream', tier: 'SS', kit: 'Speed Runner', wins: 3520, kills: 15800 },
-            { id: 5, name: 'TechnoBlade', tier: 'SS', kit: 'Crystal PvP', wins: 3410, kills: 14900 },
-            { id: 6, name: 'iReapZz', tier: 'SS', kit: 'Pot PvP', wins: 3280, kills: 14100 },
-            
-            // S TIER - LEGENDARY
-            { id: 7, name: 'Sxippy', tier: 'S', kit: 'Soup', wins: 2650, kills: 11800 },
-            { id: 8, name: 'ClutchGod', tier: 'S', kit: 'Build UHC', wins: 2590, kills: 11200 },
-            { id: 9, name: 'PvPWizard', tier: 'S', kit: 'Combo', wins: 2480, kills: 10800 },
-            
-            // A TIER - DIAMOND
-            { id: 10, name: 'CrystalMethod', tier: 'A', kit: 'Crystal', wins: 1950, kills: 8200 },
-            { id: 11, name: 'AidenTK', tier: 'A', kit: 'AxE', wins: 1880, kills: 7900 },
-            { id: 12, name: 'TigerBoy', tier: 'A', kit: 'OP Kit', wins: 1760, kills: 7500 },
-            
-            // B TIER - GOLD
-            { id: 13, name: 'NoobMaster', tier: 'B', kit: 'Default', wins: 1250, kills: 5200 },
-            { id: 14, name: 'BedwarsMain', tier: 'B', kit: 'Bridge', wins: 1180, kills: 4900 },
-            { id: 15, name: 'FirstTimer', tier: 'B', kit: 'Wood Sword', wins: 980, kills: 4100 },
-            
-            // C TIER - IRON
-            { id: 16, name: 'CraftKing', tier: 'C', kit: 'Iron Set', wins: 650, kills: 2800 },
-            { id: 17, name: 'MineMaster', tier: 'C', kit: 'Diamond', wins: 590, kills: 2500 },
-            
-            // D TIER - STONE
-            { id: 18, name: 'BlockBuilder', tier: 'D', kit: 'Stone Tools', wins: 320, kills: 1400 },
-            
-            // E TIER - WOOD
-            { id: 19, name: 'WoodenSword', tier: 'E', kit: 'Wood Gear', wins: 120, kills: 500 },
-            
-            // F TIER - NOOB
-            { id: 20, name: 'FirstDay', tier: 'F', kit: 'Fists', wins: 15, kills: 45 },
+            // X3N1AL Division
+            { name: 'Dxnnte', tier: 'SSS' },
+            { name: '24Ember', tier: 'SS' },
+            { name: 'Kylaz', tier: 'S' },
+            { name: 'liammm', tier: 'S' },
+            { name: 'coldified', tier: 'SS' },
+            { name: 'NVGItems', tier: 'A' },
+            { name: 'Saturnn', tier: 'SSS' },
+            { name: 'Dafmo', tier: 'A' },
+            { name: 'Zhwae', tier: 'B' },
+            { name: 'aly2k', tier: 'A' },
+            { name: 'Zoraxil', tier: 'SS' },
+            { name: 'IndianCanal', tier: 'B' },
+            { name: 'FireFragments', tier: 'C' },
+            { name: 'BestLT3', tier: 'B' },
+            { name: 'BestLT2', tier: 'A' },
+            { name: 'AkyDev', tier: 'SS' },
+            { name: 'Froa', tier: 'C' },
+            { name: 'cvw12eaaaa', tier: 'D' },
+            { name: 'randomht3', tier: 'C' },
+            { name: 'BestofLaw', tier: 'B' },
+            { name: 'Ogmerkk', tier: 'S' },
+            { name: 'OjabKinuha', tier: 'D' },
+            { name: 'Labuubua', tier: 'E' },
+            { name: 'godspeed', tier: 'SS' },
+            { name: 'peyamoni333', tier: 'C' },
+            { name: 'cartuis3', tier: 'D' },
+            { name: 's3bs3bseb', tier: 'E' },
+            { name: 'hHijaku', tier: 'F' },
+            { name: 'DojieV', tier: 'D' },
+            { name: 'hQahki', tier: 'C' },
+            { name: 'BigDihSucker', tier: 'F' }
         ];
 
-        // Don't modify below this line unless you know what you're doing
+        // Shuffle array function to randomize tiers
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Randomize tiers for players (but keep some structure)
+        const tierDistribution = [
+            'SSS', 'SSS', 'SSS', 'SSS',  // 4 SSS
+            'SS', 'SS', 'SS', 'SS', 'SS', 'SS',  // 6 SS
+            'S', 'S', 'S', 'S', 'S',  // 5 S
+            'A', 'A', 'A', 'A', 'A', 'A',  // 6 A
+            'B', 'B', 'B', 'B',  // 4 B
+            'C', 'C', 'C',  // 3 C
+            'D', 'D', 'D',  // 3 D
+            'E', 'E',  // 2 E
+            'F', 'F'  // 2 F
+        ];
+
+        // Assign random tiers
+        const shuffledTiers = shuffleArray([...tierDistribution]);
+        players.forEach((player, index) => {
+            if (index < shuffledTiers.length) {
+                player.tier = shuffledTiers[index];
+            }
+        });
+
+        // Don't modify below this line
         let searchTerm = '';
         let filterTier = 'all';
 
@@ -1210,16 +1184,13 @@
         function updateStats() {
             const totalPlayers = players.length;
             const sssPlayers = players.filter(p => p.tier === 'SSS').length;
-            const totalKills = players.reduce((sum, p) => sum + p.kills, 0);
-            const avgKills = Math.round(totalKills / totalPlayers);
+            const eliteCount = players.filter(p => ['SSS', 'SS', 'S'].includes(p.tier)).length;
 
             document.getElementById('totalPlayers').textContent = totalPlayers;
             document.getElementById('sssPlayers').textContent = sssPlayers;
-            document.getElementById('totalKills').textContent = totalKills.toLocaleString();
             
             document.getElementById('footerTotalPlayers').textContent = totalPlayers;
-            document.getElementById('footerTotalKills').textContent = totalKills.toLocaleString();
-            document.getElementById('footerAvgKills').textContent = avgKills.toLocaleString();
+            document.getElementById('footerEliteCount').textContent = eliteCount;
             
             document.getElementById('lastUpdate').textContent = new Date().toLocaleString();
         }
@@ -1291,29 +1262,13 @@
                 `;
 
                 if (tierPlayers.length === 0) {
-                    html += `<div class="empty-tier">⚔️ No warriors in ${tier} tier</div>`;
+                    html += `<div class="empty-tier">⚔️ No members in ${tier} tier</div>`;
                 } else {
                     tierPlayers.forEach(player => {
                         html += `
                             <div class="player-card" style="--tier-color: ${tierColor}">
-                                <div class="player-header">
-                                    <span class="player-name">${player.name}</span>
-                                    <span class="player-tier-badge" style="border-color: ${tierColor}; color: ${tierColor}">${player.tier}</span>
-                                </div>
-                                <div class="player-kit">
-                                    <span class="player-kit-icon">⚔️</span>
-                                    ${player.kit}
-                                </div>
-                                <div class="player-stats">
-                                    <div class="stat">
-                                        <div class="stat-label">Wins</div>
-                                        <div class="stat-value">${player.wins.toLocaleString()}</div>
-                                    </div>
-                                    <div class="stat">
-                                        <div class="stat-label">Kills</div>
-                                        <div class="stat-value">${player.kills.toLocaleString()}</div>
-                                    </div>
-                                </div>
+                                <div class="player-name">${player.name}</div>
+                                <div class="player-tier-badge" style="border-color: ${tierColor}; color: ${tierColor}">${player.tier}</div>
                             </div>
                         `;
                     });
